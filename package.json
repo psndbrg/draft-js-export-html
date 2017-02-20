@@ -5,9 +5,10 @@
   "main": "lib/main.js",
   "typings": "typings/index.d.ts",
   "scripts": {
-    "build": "babel src --ignore \"_*\" --out-dir lib",
+    "build": "node_modules/.bin/babel src --ignore \"_*\" --out-dir lib",
     "lint": "eslint --max-warnings 0 .",
     "typecheck": "flow",
+    "postinstall": "if [ ! -d \"lib\" ]; then npm run build; fi",
     "prepublish": "npm run build",
     "test": "npm run lint && npm run typecheck && npm run test-src",
     "test-src": "mocha \"src/**/__tests__/*.js\"",
